@@ -1,0 +1,6 @@
+@hostname = localhost
+@port = 8081
+@host = {{hostname}}:{{port}}
+@baseurl = http://{{host}}
+
+GET {{baseurl}}/api/health_check HTTP/1.1

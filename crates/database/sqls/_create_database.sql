@@ -1,0 +1,6 @@
+CREATE DATABASE notion
+	OWNER = notion
+	ENCODING = 'UTF8'
+	LOCALE = 'th_TH.utf8'
+	CONNECTION LIMIT = -1
+	TEMPLATE template0;

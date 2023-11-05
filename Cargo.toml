@@ -1,23 +1,4 @@
-[package]
-name = "notion-clone-backend"
-version = "0.1.0"
-edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[[bin]]
-# bench = false
-path = "crates/core/main.rs"
-name = "notion-clone-backend"
-
 [workspace]
-members = [
-  "crates/database",
-]
+members = ["crates/*"]
 resolver = "2"
-
-[dependencies]
-axum = "0.6.20"
-database ={ version = "0.1.0", path = "./crates/database" }
-serde = { version = "1.0.190", features = ["derive"] }
-tokio = { version = "1.33.0", features = ["macros","rt-multi-thread"] }
+default-members = ["crates/api"]
