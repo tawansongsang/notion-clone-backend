@@ -1,0 +1,14 @@
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@baseurl = http://{{host}}
+
+GET {{baseurl}} HTTP/1.1
+
+###
+POST {{baseurl}}/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "test"
+}
