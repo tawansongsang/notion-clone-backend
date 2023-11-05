@@ -3,20 +3,22 @@ use database::add;
 use axum::{
     routing::{get, post},
     http::StatusCode,
-    response::IntoResponse,
     Json, Router,
 };
 use serde::{Deserialize, Serialize};
 use std::net::SocketAddr;
+mod config;
 
 #[tokio::main]
 async fn main() {
     let result = add(200, 50);
     println!("{}", result);
-
+    
     // initialize tracing
     // tracing_subscriber::fmt::init();
-
+    
+    let config = config::Config::build().unwrap();
+    let addr = SocketAddr::from(([0, 0, 0, 0], config.server_port.clone()));
     // build our application with a route
     let app = Router::new()
         // `GET /` goes to `root`
@@ -25,10 +27,13 @@ async fn main() {
         .route("/users", post(create_user));
 
     // run our app with hyper, listening globally on port 3000
-    axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
+    axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
-        .unwrap();
+        .expect("Failed to start server");
+
+
+
 }
 
 // basic handler that responds with a static string
